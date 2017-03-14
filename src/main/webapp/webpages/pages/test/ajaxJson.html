@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajaxJson</title>
+    <script src="webpages/plug-in/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<input type="button" id="btn" value="确定">
+<script>
+    $(document).ready(function () {
+        $("#btn").click(function () {
+            // jQuery.post(url,data,success(data, textStatus, jqXHR),dataType)
+            jQuery.post(
+                "/btzapp/testController.do?test",
+                {
+                    name: "蔡晓伟",
+                    age: 34
+                },
+                function (date, state) {
+                    alert(date);
+                    alert(state);
+
+                },
+                "json"
+            )
+        });
+    });
+</script>
+</body>
+</html>
