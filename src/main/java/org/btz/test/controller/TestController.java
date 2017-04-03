@@ -32,9 +32,13 @@ public class TestController {
         return "login/login";
     }
 
+    @RequestMapping(params = "main")
+    public String main(HttpServletRequest request, HttpServletResponse response) {
+        return "main/main";
+    }
+
     @RequestMapping(params = "ajax")
     public String ajax(HttpServletRequest request, HttpServletResponse response) {
-
         return "test/ajaxJson";
     }
 
