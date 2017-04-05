@@ -12,7 +12,7 @@
 	   default-autowire="byName" default-lazy-init="false">
 
 	<!-- 加载service,此时要排除要controller,因为controller已经spring-mvc中加载过了 -->
-	<context:component-scan base-package="org.btz.test.*">
+	<context:component-scan base-package="org.btz.test.*,com.btz.*">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	<!-- 引入属性文件 -->
@@ -59,6 +59,7 @@
 		<property name="packagesToScan">
 			<list>
 				<value>org.btz.test.*</value>
+				<value>com.btz.web.*</value>
 			</list>
 		</property>
 	</bean>
