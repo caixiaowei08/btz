@@ -37,16 +37,20 @@ public class CourseClassificationController extends BaseController{
         for (int i = 0; i < 10; i++) {
             CourseClassificationEntity courseClassificationEntity = new CourseClassificationEntity();
             courseClassificationEntity.setId(i);
-            courseClassificationEntity.setCourseName("测试"+i);
+            courseClassificationEntity.setCourseName("测试测试测试测试测试测试测试"+i);
             courseClassificationEntity.setDisplayOrder(i);
-            courseClassificationEntity.setState(2);
+            if(i%2 == 0){
+                courseClassificationEntity.setState(1);
+            }else{
+                courseClassificationEntity.setState(2);
+            }
             courseClassificationEntity.setUpdateTime(new Date(System.currentTimeMillis()));
             courseClassificationEntity.setCreateTime(new Date(System.currentTimeMillis()));
             courseClassificationEntitiesList.add(courseClassificationEntity);
         }
         ajaxResponseJQueryDt.setDraw(ajaxRequestJQueryDt.getDraw());
-        ajaxResponseJQueryDt.setRecordsTotal(30);
-        ajaxResponseJQueryDt.setRecordsFiltered(30);
+        ajaxResponseJQueryDt.setRecordsTotal(11);
+        ajaxResponseJQueryDt.setRecordsFiltered(11);
         ajaxResponseJQueryDt.setData(courseClassificationEntitiesList);
         return ajaxResponseJQueryDt;
     }

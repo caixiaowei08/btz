@@ -12,7 +12,6 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "btz_course_classification", schema = "")
-@SuppressWarnings("serial")
 public class CourseClassificationEntity implements Serializable {
     private Integer id;
     private String courseName;

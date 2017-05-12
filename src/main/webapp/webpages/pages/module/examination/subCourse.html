@@ -1,0 +1,126 @@
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">Home</a>
+        </li>
+        <li>
+            <a href="#">课程管理</a>
+        </li>
+        <li class="active">课程档案</li>
+    </ul><!-- /.breadcrumb -->
+</div>
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+            <a role="button" class="green" data-toggle="modal">【课程档案】</a>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="widget-box widget-color-green2">
+                        <div class="widget-header">
+                            <h4 class="widget-title lighter smaller">
+                                <span class="smaller-80">课程分类</span>
+                            </h4>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main padding-8">
+                                <ul id="tree"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--[if !IE]> -->
+<script src="webpages/plug-in/ace/js/jquery-2.1.4.min.js"></script>
+<!-- <![endif]-->
+<!--[if IE]>
+<script src="webpages/plug-in/ace/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="webpages/plug-in/ace/js/bootstrap.min.js"></script>
+<!-- page specific plugin scripts -->
+<script src="webpages/plug-in/ace/js/tree.min.js"></script>
+<!-- ace scripts -->
+<script src="webpages/plug-in/ace/js/ace-elements.min.js"></script>
+<script src="webpages/plug-in/ace/js/ace.min.js"></script>
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    jQuery(function($){
+        var sampleData = initiateDemoData();
+        $('#tree').ace_tree({
+            dataSource: sampleData['dataSource'] ,
+            loadingHTML:'<div class="tree-loading"><i class="ace-icon fa fa-refresh fa-spin blue"></i></div>',
+            'open-icon' : 'ace-icon fa fa-folder-open',
+            'close-icon' : 'ace-icon fa fa-folder',
+            'itemSelect' : true,
+            'folderSelect': false,
+            'multiSelect': false,
+            'selected-icon' : null,
+            'unselected-icon' : null,
+            'folder-open-icon' : 'ace-icon tree-plus',
+            'folder-close-icon' : 'ace-icon tree-minus'
+        });
+
+        function initiateDemoData(){
+            var tree_data = {
+                'pictures' : {text: '会计考题', type: 'folder', 'icon-class':'blue'}	,
+                'music' : {text: 'Music', type: 'folder', 'icon-class':'green'}	,
+                'video' : {text: 'Video', type: 'folder', 'icon-class':'blue'}	,
+                'documents' : {text: 'Documents', type: 'folder', 'icon-class':'green'}
+            }
+            tree_data['music']['additionalParameters'] = {
+                'children' : [
+                    {text: '<span onclick="a()"> <i class="ace-icon fa fa-music blue"></i> song1.ogg</span>', type: 'item'},
+                    {text: '<i class="ace-icon fa fa-music blue" onclick="a()">&nbsp;song2.ogg</i>' , type: 'item'},
+                    {text: '<i class="ace-icon fa fa-music blue"></i> song3.ogg', type: 'item'},
+                    {text: '<i class="ace-icon fa fa-music blue"></i> song4.ogg', type: 'item'},
+                    {text: '<i class="ace-icon fa fa-music blue"></i> song5.ogg', type: 'item'}
+                ]
+            }
+            tree_data['video']['additionalParameters'] = {
+                'children' : [
+                    {text: '<i class="ace-icon fa fa-film blue"></i> movie1.avi', type: 'item'},
+                    {text: '<i class="ace-icon fa fa-film blue"></i> movie2.avi', type: 'item'},
+                    {text: '<i class="ace-icon fa fa-film blue"></i> movie3.avi', type: 'item'},
+                    {text: '<i class="ace-icon fa fa-film blue"></i> movie4.avi', type: 'item'},
+                    {text: '<i class="ace-icon fa fa-film blue"></i> movie5.avi', type: 'item'}
+                ]
+            }
+
+            var dataSource = function(options, callback){
+                var $data = null
+                if(!("text" in options) && !("type" in options)){
+                    $data = tree_data;//the root tree
+                    callback({ data: $data });
+                    return;
+                }
+                else if("type" in options && options.type == "folder") {
+                    if("additionalParameters" in options && "children" in options.additionalParameters)
+                        $data = options.additionalParameters.children || {};
+                    else $data = {}
+                }
+                if($data != null){
+                    setTimeout(function(){callback({ data: $data });} , parseInt(Math.random() * 500) + 200);
+                }
+            }
+            return {'dataSource': dataSource}
+        }
+    });
+    function a() {
+        console.log("aaaaa");
+
+    }
+</script>
