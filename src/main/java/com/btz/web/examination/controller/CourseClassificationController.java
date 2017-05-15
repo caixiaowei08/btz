@@ -61,7 +61,7 @@ public class CourseClassificationController extends BaseController{
         AjaxJson ajaxJson = new AjaxJson();
         Integer code = courseClassificationService.save(courseClassificationEntity);
         if(code <= 0){
-            ajaxJson.setCode(AjaxJson.CODE_FAIL);
+            //ajaxJson.setCode(AjaxJson.CODE_FAIL);
             ajaxJson.setMsg(AjaxJson.MSG_FAIL);
         }
         return ajaxJson;

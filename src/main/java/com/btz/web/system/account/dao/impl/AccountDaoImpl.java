@@ -18,7 +18,7 @@ import java.util.List;
 public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 
     public AccountEntity checkAccount(String accountId,String accountPwd){
-        String HQL= new String("from TSUser u where u.accountId = :accountId and u.accountId=:accountId");
+        String HQL= new String("from AccountEntity u where u.accountId = :accountId and u.accountPwd=:accountPwd");
         Session session = getSession();
         Query query = session.createQuery(HQL);
         query.setParameter("accountId", accountId);
