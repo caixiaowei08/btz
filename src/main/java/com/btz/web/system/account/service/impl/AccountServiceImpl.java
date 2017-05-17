@@ -2,6 +2,7 @@ package com.btz.web.system.account.service.impl;
 
 import com.btz.web.system.account.dao.AccountDao;
 import com.btz.web.system.account.entity.AccountEntity;
+import com.btz.web.system.account.pojo.Account;
 import com.btz.web.system.account.service.AccountService;
 import org.baron.framework.core.ssh.service.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,12 @@ public class AccountServiceImpl extends BaseServiceImpl implements AccountServic
         return (AccountEntity)accountDao.save(accountEntity);
     }
 
+    public int doUpdatePwd(Account account) {
+        return accountDao.doUpdatePwd(account);
+    }
     public void doUpdate(AccountEntity accountEntity) {
          accountDao.update(accountEntity);
     }
-
     public void doDel(AccountEntity accountEntity) {
          accountDao.deleteById(AccountEntity.class,accountEntity.getId());
     }

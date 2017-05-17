@@ -11,27 +11,27 @@ import java.util.Map;
  */
 public class AjaxJson implements Serializable{
 
-    public static final int CODE_SUCCESS = 0;
+    public static final String CODE_SUCCESS = "0";
 
-    public static final int CODE_FAIL = -1;
+    public static final String CODE_FAIL = "1";
 
     public static final String MSG_SUCCESS = "操作成功";
 
     public static final String MSG_FAIL = "操作失败";
 
-    private int success = CODE_SUCCESS;
+    private String success = CODE_SUCCESS;
 
     private String msg = MSG_SUCCESS;
 
-    private Object content = "";// 其他信息
+    private Object content;// 其他信息
 
     private Map<String, Object> attributes = new HashMap<String, Object>();
 
-    public int getSuccess() {
+    public String getSuccess() {
         return success;
     }
 
-    public void setSuccess(int success) {
+    public void setSuccess(String success) {
         this.success = success;
     }
 
