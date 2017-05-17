@@ -180,4 +180,18 @@ public class AccountController extends BaseController {
         ContextHolderUtils.getSession().invalidate();//删除会话
         return j;
     }
+
+    @RequestMapping(params = "getAccountFromSession")
+    @ResponseBody
+    public AjaxJson getAccountFromSession(HttpServletRequest request,HttpServletResponse response) {
+        AjaxJson j = new AjaxJson();
+        Client client = ClientManager.getInstance().getClient();
+        if(client == null||client.getManagerAccount() == null){
+            j.setSuccess(AjaxJson.CODE_FAIL);
+            j.setMsg("账户登录失败，请重新登录！");
+            return j;
+        }
+        j.setContent(client.getManagerAccount());
+        return j;
+    }
 }
