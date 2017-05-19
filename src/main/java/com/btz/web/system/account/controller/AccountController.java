@@ -1,5 +1,6 @@
 package com.btz.web.system.account.controller;
 
+import com.btz.web.constant.AccountConstant;
 import com.btz.web.constant.State;
 import com.btz.web.system.account.entity.AccountEntity;
 import com.btz.web.system.account.pojo.Account;
@@ -59,13 +60,14 @@ public class AccountController extends BaseController {
         }
 
         if(accountDb.getState().equals(State.VALID.getCode())){
-            HttpSession session =  ContextHolderUtils.getSession();
             Client client = new Client();
             client.setIp(IpUtil.getIpAddr(req));
             client.setLogindatetime(new Date());
             accountDb.setAccountPwd(null);
             client.setManagerAccount(accountDb);
-            ClientManager.getInstance().addClinet(session.getId(),client);
+            //ClientManager.getInstance().addClinet(session.getId(),client);
+            HttpSession session =  ContextHolderUtils.getSession();
+            session.setAttribute(AccountConstant.CLIENT,client);
             ajaxJson.setContent(client);
             return ajaxJson;
         }else {
@@ -97,12 +99,13 @@ public class AccountController extends BaseController {
     public AjaxJson doUpdatePwd(@RequestBody Account account, HttpServletRequest request) {
         AjaxJson j = new AjaxJson();
         Client client = ClientManager.getInstance().getClient();
-        if(client == null||client.getManagerAccount()==null||client.getManagerAccount().getId()==null){
+        AccountEntity accountEntity = globalService.getSessionAccount();
+        if(accountEntity==null){
             j.setSuccess(AjaxJson.CODE_FAIL);
             j.setMsg("请重新登录，之后再试！");
             return j;
         }
-        AccountEntity  t = accountService.doGet(client.getManagerAccount().getId());
+        AccountEntity  t = accountService.doGet(accountEntity.getId());
         if(t == null){
             j.setSuccess(AjaxJson.CODE_FAIL);
             j.setMsg("账户不存在！");
@@ -176,7 +179,7 @@ public class AccountController extends BaseController {
     @ResponseBody
     public AjaxJson logOff(HttpServletRequest request,HttpServletResponse response) {
         AjaxJson j = new AjaxJson();
-        ClientManager.getInstance().removeClinet(ContextHolderUtils.getSession().getId());//删除系统中的会话变量
+        //ClientManager.getInstance().removeClinet(ContextHolderUtils.getSession().getId());//删除系统中的会话变量
         ContextHolderUtils.getSession().invalidate();//删除会话
         return j;
     }
@@ -185,13 +188,14 @@ public class AccountController extends BaseController {
     @ResponseBody
     public AjaxJson getAccountFromSession(HttpServletRequest request,HttpServletResponse response) {
         AjaxJson j = new AjaxJson();
-        Client client = ClientManager.getInstance().getClient();
-        if(client == null||client.getManagerAccount() == null){
+        //Client client = ClientManager.getInstance().getClient();
+        AccountEntity accountEntity =  globalService.getSessionAccount();
+        if(accountEntity == null ){
             j.setSuccess(AjaxJson.CODE_FAIL);
             j.setMsg("账户登录失败，请重新登录！");
             return j;
         }
-        j.setContent(client.getManagerAccount());
+        j.setContent(accountEntity);
         return j;
     }
 }

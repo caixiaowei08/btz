@@ -1,5 +1,6 @@
 package com.btz.web.system.global.service.impl;
 
+import com.btz.web.constant.AccountConstant;
 import com.btz.web.constant.Role;
 import com.btz.web.system.account.entity.AccountEntity;
 import com.btz.web.system.account.service.AccountService;
@@ -23,14 +24,15 @@ public class GlobalServiceImpl implements GlobalService {
     @Autowired
     private AccountService accountService;
 
+
+
     public boolean isThereAdministratorRights() {
         HttpSession session = ContextHolderUtils.getSession();
         if (session == null) {
             return false;
         }
-        Client client = ClientManager.getInstance().getClient(session.getId());
-        AccountEntity accountEntity = client.getManagerAccount();
-
+        //Client client = ClientManager.getInstance().getClient(session.getId());
+        AccountEntity accountEntity = ((Client)session.getAttribute(AccountConstant.CLIENT)).getManagerAccount();
         if (accountEntity == null||accountEntity.getId() == null) {
             return false;
         }
@@ -45,5 +47,14 @@ public class GlobalServiceImpl implements GlobalService {
         }
 
         return false;
+    }
+
+    public AccountEntity getSessionAccount() {
+       Client client = (Client)ContextHolderUtils.getSession().getAttribute(AccountConstant.CLIENT);
+
+       if(client == null||client.getManagerAccount()==null){
+           return null;
+       }
+       return client.getManagerAccount();
     }
 }
