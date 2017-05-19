@@ -1,32 +1,23 @@
-package com.btz.web.user.controller;
+package com.btz.app.user.controller;
 
-import com.btz.web.constant.AccountConstant;
-import com.btz.web.constant.State;
-import com.btz.web.system.account.entity.AccountEntity;
-import com.btz.web.system.manager.pojo.Client;
 import com.btz.web.user.entity.UserEntity;
 import com.btz.web.user.service.UserService;
 import org.baron.framework.component.vo.AjaxJson;
 import org.baron.framework.core.ssh.controller.BaseController;
-import org.baron.framework.utils.ContextHolderUtils;
-import org.baron.framework.utils.IpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Date;
 
 /**
  * Created by User on 2017/5/19.
  */
 @Controller
-@RequestMapping("userController")
-public class UserController extends BaseController {
+@RequestMapping("appUserController")
+public class AppUserController extends BaseController {
 
     @Autowired
     private UserService userService;
