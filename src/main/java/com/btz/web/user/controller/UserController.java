@@ -7,6 +7,8 @@ import com.btz.web.system.manager.pojo.Client;
 import com.btz.web.user.entity.UserEntity;
 import com.btz.web.user.service.UserService;
 import org.baron.framework.component.vo.AjaxJson;
+import org.baron.framework.core.common.bootstrapTable.DataUtils;
+import org.baron.framework.core.common.hibernate.DataGrid;
 import org.baron.framework.core.ssh.controller.BaseController;
 import org.baron.framework.utils.ContextHolderUtils;
 import org.baron.framework.utils.IpUtil;
@@ -18,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by User on 2017/5/19.
@@ -55,5 +60,11 @@ public class UserController extends BaseController {
         userDb.setUserPwd("");
         ajaxJson.setContent(userDb);
         return ajaxJson;
+    }
+
+    @RequestMapping(params = "datagrid")
+    public void datagrid(HttpServletRequest request, HttpServletResponse response,@RequestBody DataGrid dataGrid) {
+        DataGrid t = userService.findPageList(dataGrid);
+        DataUtils.datagrid(response,t);
     }
 }

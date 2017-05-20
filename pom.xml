@@ -18,8 +18,6 @@
         <druid.alibaba.version>1.0.17</druid.alibaba.version>
         <mysql-connector.version>5.1.38</mysql-connector.version>
         <hibernate.version>5.2.5.Final</hibernate.version>
-
-
     </properties>
     <dependencies>
         <dependency>

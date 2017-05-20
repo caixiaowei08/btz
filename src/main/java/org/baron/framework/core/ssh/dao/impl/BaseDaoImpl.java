@@ -1,5 +1,6 @@
 package org.baron.framework.core.ssh.dao.impl;
 
+import org.baron.framework.core.common.hibernate.DataGrid;
 import org.baron.framework.core.ssh.dao.BaseDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -67,6 +68,4 @@ public abstract class BaseDaoImpl<T>implements BaseDao{
     public <T> T get(Class<T> entityClass, final Serializable id) {
         return (T) getSession().get(entityClass, id);
     }
-
-
 }

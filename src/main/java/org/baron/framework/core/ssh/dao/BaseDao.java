@@ -1,5 +1,7 @@
 package org.baron.framework.core.ssh.dao;
 
+import org.baron.framework.core.common.hibernate.DataGrid;
+
 import java.io.Serializable;
 
 /**
