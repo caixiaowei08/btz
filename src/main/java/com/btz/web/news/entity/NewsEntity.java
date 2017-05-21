@@ -10,14 +10,12 @@ import java.util.Date;
  * Created by User on 2017/5/19.
  */
 @Entity
-@Table(name = "btz_news_info")
+@Table(name = "btz_app_ad_carousel")
 public class NewsEntity implements Serializable {
     private Integer id;
-    private String title;
     private String img;
-    private String content;
-    private Integer status;
     private String url;
+    private Integer sfyn;
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
@@ -25,7 +23,7 @@ public class NewsEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name ="id",nullable=false)
+    @Column(name ="ID",nullable=false)
     public Integer getId() {
         return id;
     }
@@ -34,16 +32,7 @@ public class NewsEntity implements Serializable {
         this.id = id;
     }
 
-    @Column(name ="title")
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Column(name ="img")
+    @Column(name ="img",nullable=false)
     public String getImg() {
         return img;
     }
@@ -51,26 +40,7 @@ public class NewsEntity implements Serializable {
     public void setImg(String img) {
         this.img = img;
     }
-
-    @Column(name ="content")
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    @Column(name ="status")
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    @Column(name ="url")
+    @Column(name ="url",nullable=false)
     public String getUrl() {
         return url;
     }
@@ -78,8 +48,15 @@ public class NewsEntity implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
+    @Column(name ="sfyn",nullable=false)
+    public Integer getSfyn() {
+        return sfyn;
+    }
 
-    @Column(name ="createTime")
+    public void setSfyn(Integer sfyn) {
+        this.sfyn = sfyn;
+    }
+    @Column(name ="createTime",nullable=true)
     public Date getCreateTime() {
         return createTime;
     }
@@ -88,7 +65,7 @@ public class NewsEntity implements Serializable {
         this.createTime = createTime;
     }
 
-    @Column(name ="updateTime")
+    @Column(name ="updateTime",nullable=true)
     public Date getUpdateTime() {
         return updateTime;
     }

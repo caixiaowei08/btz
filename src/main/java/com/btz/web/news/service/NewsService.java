@@ -8,11 +8,11 @@ import org.baron.framework.core.ssh.service.BaseService;
  */
 public interface NewsService extends BaseService {
 
-    public NewsEntity doAdd(NewsEntity newsEntity);
+    public Integer doAdd(NewsEntity newsEntity);
 
-    public Integer doDel(NewsEntity newsEntity);
+    public void doDel(NewsEntity newsEntity);
 
-    public Integer doUpdate(NewsEntity newsEntity);
+    public void doUpdate(NewsEntity newsEntity);
 
 
 
